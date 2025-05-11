@@ -1,0 +1,7 @@
+{
+  "block.createcopperaddon.flask": "Flask",
+  "item.createcopperaddon.flask.tooltip": "",
+  "itemGroup.createcopperaddon.main": "Create: Copper Edition",
+  "createcopperaddon.ponder.flask_demo.header": "Processing liquids in the flask",
+  "createcopperaddon.ponder.flask_demo.text_1": "The Flask can hold liquids for processing"
+}

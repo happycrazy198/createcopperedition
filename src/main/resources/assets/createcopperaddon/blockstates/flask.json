@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "createcopperaddon:block/flask" },
+    "facing=south": { "model": "createcopperaddon:block/flask" },
+    "facing=east":  { "model": "createcopperaddon:block/flask" },
+    "facing=west":  { "model": "createcopperaddon:block/flask" },
+    "facing=up":    { "model": "createcopperaddon:block/flask" },
+    "facing=down":  { "model": "createcopperaddon:block/flask" }
+  }
+}

@@ -1,0 +1,74 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.24'
+    id 'java'
+    id 'maven-publish'
+}
+
+group = "com.happycrazy198.createcopperaddon"
+archivesBaseName = "createcopperaddon"
+version = "1.0.0-1.20.1"
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    withSourcesJar()
+}
+
+repositories {
+    // Forge mappings & Forge itself
+    maven { url "https://maven.minecraftforge.net/" }
+    // Create (TTerraG’s repo)
+    maven { url "https://maven.tterrag.com/" }
+    // Flywheel (Jozufozu’s repo)
+    maven { url "https://maven.jozufozu.com/" }
+    // Registrate (TTerraG’s repo as well)
+    maven { url = "https://maven.tterrag.com/" }          // Registrate, etc.
+    maven { url = "https://maven.creeperhost.net/" }   // Create, Flywheel
+    // Maven Central fallback
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.20.1-47.2.0"
+    // Create mod (slim jar). Use fg.deobf to get the unmapped jar.
+    implementation fg.deobf("com.simibubi.create:create-1.20.1:0.5.1.f-32:slim") { transitive = false }
+
+    // Flywheel for Create 1.20.1
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-1.20.1:0.6.10-7")
+
+    // Registrate for Create 1.20.1
+    implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.3")
+}
+
+minecraft {
+    // Use Mojang’s official mappings for FG6
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory file('run')
+            args '--username', 'Dev'
+            mods {
+                createcopperaddon { source sourceSets.main }
+            }
+        }
+        server {
+            workingDirectory file('run')
+            mods {
+                createcopperaddon { source sourceSets.main }
+            }
+        }
+        data {
+            workingDirectory file('run')
+            args '--mod', 'createcopperaddon', '--all', '--output', file('src/generated/resources/')
+            mods {
+                createcopperaddon { source sourceSets.main }
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    // Target Java 17
+    options.release.set(17)
+}

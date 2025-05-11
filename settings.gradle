@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = "https://maven.architectury.dev/" }
+        maven { url = "https://maven.minecraftforge.net/" }
+    }
+}
+
+def enabled_platforms = (System.getenv("ENABLED_PLATFORMS") ?: "forge").split(",")
+
+include("common")
+enabled_platforms.each { platform ->
+    include(platform)
+}
+
+rootProject.name = 'createcopperaddon'
